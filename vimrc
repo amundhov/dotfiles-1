@@ -97,6 +97,13 @@ noremap - <PageUp>
 " have % bounce between angled brackets, as well as t'other kinds:
 set matchpairs+=<:>
 
+" have <F1> save current work and execute last command and do it from any mode:
+nnoremap <F1> :w<cr>:!!<cr>
+vmap <F1> <C-C><F1>
+omap <F1> <C-C><F1>
+map! <F1> <C-C><F1>
+
+
 " * Keystrokes -- Formatting
 
 " have Q reformat the current paragraph (or selected text if there is any):
