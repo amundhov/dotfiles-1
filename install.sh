@@ -3,7 +3,7 @@
 
 BASEDIR=$(readlink -m `dirname $0`)
 
-for file in muttrc vimrc xsession zshrc XCompose Xmodmap Xresources; do
+for file in bashrc muttrc vim vimrc xsession zshrc XCompose Xmodmap Xresources; do
   test -f ~/.$file || ln -s $BASEDIR/$file ~/.$file
 done
 
