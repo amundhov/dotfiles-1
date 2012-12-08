@@ -1,7 +1,5 @@
 ! color and font settings
-*background: black
-*foreground: green
-*faceName:   terminus:pixelsize=12
+*faceName:   terminus:pixelsize=11
 
 ! tango colors:
 *color0:  rgb:2e2e/3434/3636
@@ -23,5 +21,7 @@
 
 ! scrollbar styling
 URxvt.scrollBar: false
+URxvt.background: black
+URxvt.foregrouns: green
 URxvt.matcher.button: 2
 URxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-] 

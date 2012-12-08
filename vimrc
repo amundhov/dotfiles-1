@@ -1,5 +1,4 @@
 " Contro variables for skipping some setup, can be set from .local
-let g:skip_language_settings=0
 let g:skip_pylint=0
 let g:skip_omni_complete=0
 
@@ -19,12 +18,27 @@ set pastetoggle=<F10>
 
 colorscheme peachpuff
 
+set spelllang=en,no
+
+" latex-suite
+filetype plugin indent on
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor = "latex"
+let g:Tex_DefaultTargetFormat = 'pdf'
+
+" Run make every time a tex file is save
+command! Reload :! (make &>/dev/null) &
+au BufWritePost *.tex silent Reload
+
+" Also, this installs to /usr/share/vim/vimfiles, which may not be in
+" your runtime path (RTP). Be sure to add it too, e.g:
+set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
+
 " Avoid trailing spaces.
 highlight WhitespaceEOL ctermbg=red guibg=red
 autocmd BufWinEnter * match WhitespaceEOL /\s\+$/
 
-if g:skip_language_settings==0
-	autocmd FileType c,cpp,slang set cindent
+	autocmd FileType c,cpp,slang set cindent ts=4
 	autocmd FileType c set formatoptions+=ro cindent
 	autocmd FileType perl set smartindent ts=4 et shiftwidth=4
 	autocmd FileType php set autoindent
@@ -34,10 +48,9 @@ if g:skip_language_settings==0
 	autocmd FileType make set noexpandtab shiftwidth=8
 	autocmd FileType xml set tabstop=2 expandtab
 	autocmd FileType python set ts=4 et shiftwidth=4
-	autocmd Filetype bash,sh set fo+=tl
+	autocmd Filetype bash,sh set fo+=tl ts=4 et
 	autocmd Filetype tex set fo+=tln
 	autocmd FileType mail set com=s1:/*,mb:*,ex:*/,n:>,b:#,b:%,b:=,b:-,b:+,b:o fo=tqlnor
-endif
 
 if g:skip_pylint==0
 	function! s:PyLint()
@@ -54,7 +67,7 @@ if g:skip_omni_complete==0
 	autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 endif
 
-set wildmode=list:longest,full
+"set wildmode=list:longest,full
 
 " use "[RO]" for "[readonly]" to save space in the message line:
 set shortmess+=r
@@ -133,13 +146,13 @@ set termencoding=utf-8
 au BufNewFile,BufRead mutt*        set tw=77 ai nocindent fileencoding=utf-8
 au BufNewFile,BufRead .drafts/*    set tw=77 ai nocindent fileencoding=utf-8
 
-function! CleverTab()
-	if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
-		return "\<Tab>"
-	else
-		return "\<C-N>"
-endfunction
-inoremap <Tab> <C-R>=CleverTab()<CR>
+" function! CleverTab()
+" 	if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
+" 		return "\<Tab>"
+" 	else
+" 		return "\<C-N>"
+" endfunction
+" inoremap <Tab> <C-R>=CleverTab()<CR>
 
 highlight WhitespaceEOL ctermbg=red guibg=red
 match WhitespaceEOL /\s\+$/
